@@ -6,9 +6,10 @@ interface Coords {
   longitude: number;
 }
 
-interface LocationInfo extends Coords {
-  address: string;
-}
+// expo-location est la librairie qui donne accès au GPS.
+// Elle fait le pont entre JavaScript et les APIs natives du téléphone :
+// Sans elle, tu ne peux pas accéder au GPS depuis React Native.
+// C'est elle qui gère aussi les permissions (requestForegroundPermissionsAsync).
 
 const requestPermission = async (): Promise<boolean> => {
   const { status } = await Location.requestForegroundPermissionsAsync();
@@ -16,7 +17,6 @@ const requestPermission = async (): Promise<boolean> => {
 };
 
 /* Get current location */
-
 const getLocation = async (): Promise<Coords | null> => {
   const granted = await requestPermission();
   if (!granted) return null;
@@ -32,7 +32,7 @@ const getLocation = async (): Promise<Coords | null> => {
 };
 
 /* Track location changes */
-export const trackLocation = async (
+const trackLocation = async (
   onChange: (coords: Coords) => void,
 ): Promise<Location.LocationSubscription | null> => {
   const granted = await requestPermission();
@@ -73,8 +73,8 @@ const getLocationName = async (coords: Coords): Promise<string | null> => {
 const useLocation = () => {
   const [address, setAddress] = useState<string>("");
   const [coords, setCoords] = useState<Coords>({
-    latitude: 48.8397,
-    longitude: 2.2421,
+    latitude: 0,
+    longitude: 0,
   });
   const [loading, setLoading] = useState(true);
   const [ready, setReady] = useState(false); // ✅ signals when done
@@ -85,8 +85,8 @@ const useLocation = () => {
     const init = async () => {
       const initialCoords = await getLocation();
       const currentCoords = {
-        latitude: initialCoords?.latitude ?? 48.8397,
-        longitude: initialCoords?.longitude ?? 2.2421,
+        latitude: initialCoords?.latitude ?? 0,
+        longitude: initialCoords?.longitude ?? 0,
       };
       setCoords(currentCoords);
 
