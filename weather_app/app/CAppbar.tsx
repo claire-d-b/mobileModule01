@@ -1,37 +1,10 @@
-import * as Location from "expo-location";
-import React, { useState, useEffect } from "react";
-import { View, ActivityIndicator, BlurEvent } from "react-native";
-import { Appbar, Text, IconButton, Icon } from "react-native-paper";
-import { evaluate } from "mathjs";
+import React, { useState } from "react";
+import { View } from "react-native";
+import { Appbar, IconButton, Icon } from "react-native-paper";
 import CTextInput from "./CTextInput";
 import CBottomNav from "./CBottomNav";
-import useLocation from "./useLocation";
-
-const messages = [
-  "7",
-  "8",
-  "9",
-  "C",
-  "AC",
-  "4",
-  "5",
-  "6",
-  "+",
-  "-",
-  "1",
-  "2",
-  "3",
-  "x",
-  "/",
-  "0",
-  ".",
-  "00",
-  "=",
-  "",
-];
 
 export default function CAppbar() {
-  const { address: detectedAddress } = useLocation();
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
 
@@ -94,7 +67,7 @@ export default function CAppbar() {
           iconColor="white"
           size={20}
           onPress={() => {
-            setLocation(detectedAddress);
+            setLocation("Geolocation");
           }}
           style={{ transform: "rotate(45deg);" }}
         />
@@ -116,7 +89,7 @@ export default function CAppbar() {
           <CBottomNav
             location={location}
             style={{
-              paddingBottom: 40,
+              paddingBottom: 60,
             }}
           />
         </View>
