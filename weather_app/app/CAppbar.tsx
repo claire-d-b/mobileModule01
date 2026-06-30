@@ -74,6 +74,10 @@ const _ = () => {
       </Appbar.Header>
       <View
         style={{
+          // width: "100%" / height: "100%"
+          // Prend 100% de la taille du parent direct. Ça peut poser problème si le parent n'a pas de taille définie.
+          // flex: 1
+          // Prend tout l'espace disponible restant dans le parent, en tenant compte des autres enfants.
           flex: 1,
         }}
       >
