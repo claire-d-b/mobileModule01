@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BottomNavigation, Text } from "react-native-paper";
-import { View } from "react-native";
+import { View, useWindowDimensions } from "react-native";
+import PagerView from "react-native-pager-view";
 
 interface Prop {
   location: string;
@@ -68,6 +69,7 @@ interface Props {
 }
 
 const _ = ({ location, style }: Props) => {
+  const pagerRef = React.useRef<PagerView>(null);
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
@@ -104,16 +106,35 @@ const _ = ({ location, style }: Props) => {
   };
 
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-      activeColor="white"
-      inactiveColor="white"
-      activeIndicatorStyle={{ backgroundColor: "#534DB3" }}
-      barStyle={{ backgroundColor: "#534DB3" }}
-      style={style}
-    />
+      <View style={{ flex: 1, ...style }}>
+      <PagerView
+        ref={pagerRef}
+        style={{ flex: 1 }}
+        initialPage={0}
+        onPageSelected={(e) => setIndex(e.nativeEvent.position)}
+      >
+      {
+        routes.map((route) => (
+          <View key={route.key} style={{ flex: 1 }}>
+            {renderScene({ route })}
+          </View>
+        ))
+      }
+      </PagerView>
+
+      <BottomNavigation.Bar
+        navigationState={{ index, routes }}
+        onTabPress={({ route }) => {
+          const newIndex = routes.findIndex((r) => r.key === route.key);
+          pagerRef.current?.setPageWithoutAnimation(newIndex);
+          setIndex(newIndex);
+        }}
+        activeColor="white"
+        inactiveColor="white"
+        activeIndicatorStyle={{ backgroundColor: "#534DB3" }}
+        style={{ backgroundColor: "#534DB3" }}
+      />
+    </View>
   );
 };
 
