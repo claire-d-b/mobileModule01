@@ -67,7 +67,7 @@ interface Props {
   style: {};
 }
 
-const CBottomNav = ({ location, style }: Props) => {
+const _ = ({ location, style }: Props) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     {
@@ -117,4 +117,4 @@ const CBottomNav = ({ location, style }: Props) => {
   );
 };
 
-export default CBottomNav;
+export default _;

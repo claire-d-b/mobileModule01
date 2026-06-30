@@ -4,7 +4,7 @@ import { Appbar, IconButton, Icon } from "react-native-paper";
 import CTextInput from "./CTextInput";
 import CBottomNav from "./CBottomNav";
 
-export default function CAppbar() {
+const _ = () => {
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
 
@@ -96,4 +96,6 @@ export default function CAppbar() {
       </View>
     </View>
   );
-}
+};
+
+export default _;

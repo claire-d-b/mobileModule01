@@ -3,7 +3,7 @@ import { PaperProvider, MD3LightTheme } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import CAppbar from "./CAppbar";
 
-export default function App() {
+const _ = () => {
   return (
     <SafeAreaProvider>
       <PaperProvider theme={MD3LightTheme}>
@@ -11,4 +11,6 @@ export default function App() {
       </PaperProvider>
     </SafeAreaProvider>
   );
-}
+};
+
+export default _;
