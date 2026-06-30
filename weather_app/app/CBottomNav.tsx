@@ -64,7 +64,7 @@ const WeeklyRoute = ({ location }: Prop) => (
 
 interface Props {
   location: string;
-  style: {};
+  style?: {};
 }
 
 const _ = ({ location, style }: Props) => {

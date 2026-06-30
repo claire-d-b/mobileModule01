@@ -74,24 +74,17 @@ const _ = () => {
       </Appbar.Header>
       <View
         style={{
-          width: "100%",
-          height: "100%",
+          flex: 1,
         }}
       >
         <View
           style={{
-            height: "100%",
-            width: "100%",
+            flex: 1,
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <CBottomNav
-            location={location}
-            style={{
-              paddingBottom: 60,
-            }}
-          />
+          <CBottomNav location={location} />
         </View>
       </View>
     </View>
